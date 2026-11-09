@@ -11,6 +11,14 @@ name: immich
 
 services:
   immich-server:
+    labels:
+      traefix.enable: "true"
+      traefik.http.routers.immich.rule: "Host(`immich.welovelsu.com`)"
+      traefik.http.routers.immich.entrypoints: websecure
+      traefik.http.routers.immich.service: immich-server
+      traefik.http.routers.immich.tls.certresolver: cloudflare
+      traefik.http.routers.immich.tls: true
+      traefik.http.services.immich-server.loadblanacer.server.port: "2283"
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     # extends:
