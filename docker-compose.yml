@@ -54,7 +54,7 @@ services:
     env_file:
       - .env
     restart: always
-    network:
+    networks:
       - frontend
     healthcheck:
       disable: false
@@ -65,7 +65,7 @@ services:
     healthcheck:
       test: redis-cli ping | grep -q PONG || exit 1
     restart: always
-    network:
+    networks:
       - frontend
 
   database:
