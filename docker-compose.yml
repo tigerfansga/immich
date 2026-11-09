@@ -27,6 +27,8 @@ services:
     depends_on:
       - redis
       - database
+    networks:
+      - frontend
     restart: always
     healthcheck:
       disable: false
@@ -44,6 +46,8 @@ services:
     env_file:
       - .env
     restart: always
+    network:
+      - frontend
     healthcheck:
       disable: false
 
@@ -53,6 +57,8 @@ services:
     healthcheck:
       test: redis-cli ping | grep -q PONG || exit 1
     restart: always
+    network:
+      - frontend
 
   database:
     container_name: immich_postgres
@@ -74,3 +80,7 @@ services:
 
 volumes:
   model-cache:
+
+networks:
+  frontend:
+    external: true
