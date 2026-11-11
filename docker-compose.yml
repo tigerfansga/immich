@@ -97,4 +97,4 @@ networks:
   frontend:
     external: true
   backend:
-    internal: true
+    driver: bridge
